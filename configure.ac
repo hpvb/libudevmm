@@ -1,0 +1,29 @@
+dnl Process this file with autoconf to produce a configure script.
+
+AC_PREREQ([2.69])
+AC_INIT([libudevmm],[1.0])
+AC_PROG_CC
+
+AC_CANONICAL_TARGET
+AC_PROG_CXX
+AC_LANG([C++])
+
+AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_MACRO_DIR([m4])
+
+AM_INIT_AUTOMAKE([-Wall])
+AM_PROG_CC_C_O 
+
+AM_PROG_AR
+LT_INIT([disable-static])
+LT_INIT
+
+CXXFLAGS="-O3 -Wall -Wextra -Werror -g3"
+AC_SUBST([AM_CXXFLAGS])
+
+AC_CONFIG_FILES(Makefile
+                libudevmm-1.0.pc
+                exampleProgram/Makefile
+                libudevmm/Makefile
+                include/Makefile)
+AC_OUTPUT

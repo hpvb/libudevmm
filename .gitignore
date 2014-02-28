@@ -1,0 +1,44 @@
+# Eclipse project files
+.autotools
+.cproject
+.project
+.settings
+
+# Autotools generated
+aclocal.m4
+ar-lib
+compile
+config.guess
+config.h
+config.h.in
+config.log
+config.status
+config.sub
+configure
+depcomp
+install-sh
+libtool
+ltmain.sh
+missing
+stamp-h1
+m4/libtool.m4
+m4/lt~obsolete.m4
+m4/ltoptions.m4
+m4/ltsugar.m4
+m4/ltversion.m4
+autom4te.cache/
+
+# Custom generated
+libudevmm-1.0.pc
+
+# Build system generated
+*/.deps/
+*/.libs/
+*Makefile
+*Makefile.in
+*.o
+*.lo
+*.la
+
+# Build artifacts
+exampleProgram/exampleProgram
