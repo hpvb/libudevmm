@@ -19,15 +19,14 @@
 #include <algorithm>
 #include <libudev.h>
 
+#include <libudevmm/device.hpp>
 #include <libudevmm/enumerator.hpp>
 #include <libudevmm/enumerator_iterator.hpp>
 
 #include "device_private.hpp"
+#include "enumerator_private.hpp"
 
 namespace udevmm {
-struct enumerator::enumerator_private {
-	udev_enumerate* _enumerate;
-};
 
 enumerator::enumerator(const enumerator& other) :
 		_d_ptr(new enumerator_private) {
@@ -40,12 +39,13 @@ enumerator::enumerator(enumerator_private* d_ptr) :
 }
 
 enumerator::~enumerator() {
-	udev_enumerate_unref (_d_ptr->_enumerate);
+	udev_enumerate_unref(_d_ptr->_enumerate);
 	delete _d_ptr;
 }
 
 void enumerator::add_match(const enumerator::subsystem& query) {
-	udev_enumerate_add_match_subsystem(_d_ptr->_enumerate, query._subsystem.c_str());
+	udev_enumerate_add_match_subsystem(_d_ptr->_enumerate,
+			query._subsystem.c_str());
 }
 
 void enumerator::add_match(const enumerator::sysattr& query) {
@@ -54,8 +54,8 @@ void enumerator::add_match(const enumerator::sysattr& query) {
 }
 
 void enumerator::add_match(const enumerator::property& query) {
-	udev_enumerate_add_match_property(_d_ptr->_enumerate, query._property.c_str(),
-			query._value.c_str());
+	udev_enumerate_add_match_property(_d_ptr->_enumerate,
+			query._property.c_str(), query._value.c_str());
 }
 
 void enumerator::add_match(const enumerator::tag& query) {
@@ -63,11 +63,13 @@ void enumerator::add_match(const enumerator::tag& query) {
 }
 
 void enumerator::add_match(const enumerator::parent& query) {
-	udev_enumerate_add_match_parent(_d_ptr->_enumerate, query._parent._d_ptr->_device);
+	udev_enumerate_add_match_parent(_d_ptr->_enumerate,
+			query._parent._d_ptr->_device);
 }
 
 void enumerator::add_match(const enumerator::sysname& query) {
-	udev_enumerate_add_match_sysname(_d_ptr->_enumerate, query._sysname.c_str());
+	udev_enumerate_add_match_sysname(_d_ptr->_enumerate,
+			query._sysname.c_str());
 }
 
 enumerator& enumerator::operator=(enumerator other) {
@@ -77,11 +79,11 @@ enumerator& enumerator::operator=(enumerator other) {
 }
 
 enumerator::iterator enumerator::begin() const {
-	udev_enumerate_scan_devices (_d_ptr->_enumerate);
+	udev_enumerate_scan_devices(_d_ptr->_enumerate);
 	return enumerator_iterator(*this);
 }
 
 enumerator::iterator enumerator::end() const {
-	return enumerator_iterator(NULL);
+	return enumerator_iterator(0);
 }
 }

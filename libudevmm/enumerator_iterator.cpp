@@ -16,12 +16,12 @@
  * along with systemd; If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef libudevmm_enumerator_iterator_H
-#define libudevmm_enumerator_iterator_H
-
 #include <libudev.h>
 
 #include <libudevmm/enumerator_iterator.hpp>
+
+#include "device_private.hpp"
+#include "enumerator_private.hpp"
 
 namespace udevmm {
 struct enumerator_iterator::enumerator_iterator_private {
@@ -38,16 +38,25 @@ enumerator_iterator::enumerator_iterator(const enumerator& enumerator) :
 	_d_ptr->_current = _d_ptr->_head;
 }
 
+enumerator_iterator::enumerator_iterator(int start) :
+		_d_ptr(new enumerator_iterator_private) {
+	(void)start;
+
+	_d_ptr->_enumerate = NULL;
+	_d_ptr->_head = NULL;
+	_d_ptr->_current = NULL;
+}
+
 enumerator_iterator::~enumerator_iterator() {
 	udev_enumerate_unref(_d_ptr->_enumerate);
 	delete _d_ptr;
 }
 
-bool enumerator_iterator::operator==(const self_type& rhs) const {
+bool enumerator_iterator::operator==(const enumerator_iterator::self_type& rhs) const {
 	return _d_ptr->_current == rhs._d_ptr->_current;
 }
 
-bool enumerator_iterator::operator!=(const self_type& rhs) const {
+bool enumerator_iterator::operator!=(const enumerator_iterator::self_type& rhs) const {
 	return _d_ptr->_current != rhs._d_ptr->_current;
 }
 
@@ -56,7 +65,7 @@ enumerator_iterator::value_type enumerator_iterator::operator*() {
 	udev_device* dev = udev_device_new_from_syspath(
 			udev_enumerate_get_udev(_d_ptr->_enumerate), syspath);
 
-	return device(dev);
+	return device(new device::device_private(dev));
 }
 
 enumerator_iterator::self_type& enumerator_iterator::operator++() {
@@ -65,5 +74,3 @@ enumerator_iterator::self_type& enumerator_iterator::operator++() {
 }
 
 }
-
-#endif

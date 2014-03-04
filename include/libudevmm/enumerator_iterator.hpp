@@ -19,10 +19,12 @@
 #ifndef libudevmm_enumerator_iterator_H
 #define libudevmm_enumerator_iterator_H
 
-#include <libudevmm/enumerator.hpp>
 #include <libudevmm/device.hpp>
+#include <libudevmm/enumerator.hpp>
 
 namespace udevmm {
+class enumerator;
+
 //TODO Make this a complete input_iterator
 class enumerator_iterator {
 public:
@@ -35,11 +37,11 @@ public:
 	value_type operator*();
 	self_type& operator++();
 
-	friend class udevmm::enumerator;
+	friend class enumerator;
 private:
 	struct enumerator_iterator_private;
-	enumerator_iterator();
-	//enumerator_iterator(const enumerator& enumerator);
+	enumerator_iterator(int);
+	enumerator_iterator(const enumerator& enumerator);
 	enumerator_iterator_private* _d_ptr;
 };
 }

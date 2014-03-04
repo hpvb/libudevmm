@@ -16,20 +16,12 @@
  * along with systemd; If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef libudevmm_device_private_H
-#define libudevmm_device_private_H
+#ifndef libudevmm_enumerator_private_H
+#define libudevmm_enumerator_private_H
 
 namespace udevmm {
-struct device::device_private {
-	device_private(udev_device* dev) :
-			_device(dev) {
-	}
-
-	device_private() :
-			_device(NULL) {
-	}
-
-	udev_device* _device;
+struct enumerator::enumerator_private {
+	udev_enumerate* _enumerate;
 };
 }
 #endif

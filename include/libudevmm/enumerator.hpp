@@ -23,6 +23,8 @@
 #include <libudevmm/enumerator_iterator.hpp>
 
 namespace udevmm {
+class enumerator_iterator;
+
 class enumerator {
 public:
 	typedef enumerator_iterator iterator;
@@ -103,6 +105,8 @@ public:
 
 	iterator begin() const;
 	iterator end() const;
+
+	friend class enumerator_iterator;
 private:
 	struct enumerator_private;
 	enumerator(enumerator_private* enumerator_private);

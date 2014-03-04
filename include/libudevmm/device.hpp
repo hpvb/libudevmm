@@ -43,6 +43,7 @@ public:
 	const std::string sysattr_value(const std::string& sysattr);
 
 	friend class enumerator;
+	friend class enumerator_iterator;
 private:
 	struct device_private;
 	device();
