@@ -18,7 +18,8 @@
 
 #include <libudevmm.hpp>
 
-void
-print_hello(){
-  printf("!!!Hello World!!!\n");
+namespace udevmm {
+void print_hello() {
+	printf("!!!Hello World!!!\n");
+}
 }

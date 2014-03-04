@@ -20,7 +20,8 @@
 #define libudevmm_H
 
 #include "stdio.h"
-
-extern void print_hello ();
+namespace udevmm {
+extern void print_hello();
+}
 
 #endif

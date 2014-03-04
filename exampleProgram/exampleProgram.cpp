@@ -19,6 +19,6 @@
 #include <libudevmm.hpp>
 
 int main(void) {
-  print_hello();
+  udevmm::print_hello();
   return 0;
 }

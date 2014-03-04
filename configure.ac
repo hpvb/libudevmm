@@ -11,7 +11,7 @@ AC_LANG([C++])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 
-AM_INIT_AUTOMAKE([-Wall])
+AM_INIT_AUTOMAKE([-Wall subdir-objects])
 AM_PROG_CC_C_O 
 
 AM_PROG_AR
@@ -22,8 +22,5 @@ CXXFLAGS="-O3 -Wall -Wextra -Werror -g3"
 AC_SUBST([AM_CXXFLAGS])
 
 AC_CONFIG_FILES(Makefile
-                libudevmm-1.0.pc
-                exampleProgram/Makefile
-                libudevmm/Makefile
-                include/Makefile)
+                libudevmm-1.0.pc)
 AC_OUTPUT
