@@ -16,10 +16,12 @@
  * along with systemd; If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <libudevmm.hpp>
+#ifndef libudevmm_device_private_H
+#define libudevmm_device_private_H
 
 namespace udevmm {
-void print_hello() {
-	printf("!!!Hello World!!!\n");
+struct device::device_private {
+	udev_device* _device;
+};
 }
-}
+#endif

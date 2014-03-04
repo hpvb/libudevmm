@@ -21,6 +21,8 @@ LT_INIT
 CXXFLAGS="-O3 -Wall -Wextra -Werror -g3"
 AC_SUBST([AM_CXXFLAGS])
 
+PKG_CHECK_MODULES([DEPS], [libudev])
+
 AC_CONFIG_FILES(Makefile
                 libudevmm-1.0.pc)
 AC_OUTPUT
