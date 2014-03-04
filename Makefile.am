@@ -12,7 +12,7 @@ libudevmm_libudevmm_la_CPPFLAGS = -Iinclude
 
 include_HEADERS = include/libudevmm.hpp
 udevmmincludedir = $(includedir)/libudevmm
-udevmminclude_HEADERS = include/libudevmm/device.hpp
+udevmminclude_HEADERS = include/libudevmm/*.hpp
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libudevmm-1.0.pc
