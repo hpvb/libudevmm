@@ -4,6 +4,7 @@ AM_CFLAGS = $(DEPS_CFLAGS)
 
 lib_LTLIBRARIES = libudevmm/libudevmm.la
 libudevmm_libudevmm_la_SOURCES = \
+ libudevmm/*.hpp\
  libudevmm/device.cpp\
  libudevmm/enumerator.cpp\
  libudevmm/enumerator_iterator.cpp
