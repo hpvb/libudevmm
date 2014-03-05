@@ -41,5 +41,8 @@ libudevmm-1.0.pc
 *.lo
 *.la
 
+# Profiling tools
+*gmon.out
+
 # Build artifacts
 exampleProgram/exampleProgram

@@ -19,7 +19,6 @@
 #ifndef libudevmm_device_private_H
 #define libudevmm_device_private_H
 
-#include <iostream>
 #include <libudevmm/device.hpp>
 
 namespace udevmm {
