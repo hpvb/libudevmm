@@ -13,7 +13,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with systemd; If not, see <http://www.gnu.org/licenses/>.
+ * along with libudevmm; If not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef libudevmm_enumerator_private_H
