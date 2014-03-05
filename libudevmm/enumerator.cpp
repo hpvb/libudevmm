@@ -29,9 +29,8 @@
 namespace udevmm {
 
 enumerator::enumerator(const enumerator& other) :
-		_d_ptr(new enumerator_private) {
-	_d_ptr->_enumerate = other._d_ptr->_enumerate;
-	udev_enumerate_ref(_d_ptr->_enumerate);
+		_d_ptr(other._d_ptr) {
+
 }
 
 enumerator::enumerator(enumerator_private* d_ptr) :
@@ -39,7 +38,6 @@ enumerator::enumerator(enumerator_private* d_ptr) :
 }
 
 enumerator::~enumerator() {
-	udev_enumerate_unref(_d_ptr->_enumerate);
 	delete _d_ptr;
 }
 

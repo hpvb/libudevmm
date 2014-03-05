@@ -18,7 +18,7 @@ AM_PROG_AR
 LT_INIT([disable-static])
 LT_INIT
 
-CXXFLAGS="-O3 -Wall -Wextra -Werror -g3"
+CXXFLAGS="-std=c++11 -O3 -Wall -Wextra -Werror -g3"
 AC_SUBST([AM_CXXFLAGS])
 
 PKG_CHECK_MODULES([DEPS], [libudev])

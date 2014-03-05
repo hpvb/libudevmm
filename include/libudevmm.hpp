@@ -19,6 +19,7 @@
 #ifndef libudevmm_H
 #define libudevmm_H
 
+#include <libudevmm/udev.hpp>
 #include <libudevmm/device.hpp>
 #include <libudevmm/enumerator.hpp>
 #include <libudevmm/enumerator_iterator.hpp>

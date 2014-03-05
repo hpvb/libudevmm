@@ -18,6 +18,7 @@
 
 #include <libudev.h>
 
+#include <libudevmm/enumerator.hpp>
 #include <libudevmm/enumerator_iterator.hpp>
 
 #include "device_private.hpp"

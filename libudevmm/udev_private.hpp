@@ -16,17 +16,30 @@
  * along with libudevmm; If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <iostream>
-#include <libudevmm.hpp>
+#ifndef libudevmm_udev_private_H
+#define libudevmm_udev_private_H
 
-int main(void) {
-	udevmm::udev udev = udevmm::udev();
-	udevmm::enumerator query = udev.new_enumerator();
+#include <libudev.h>
+#include <libudevmm/udev.hpp>
 
-	query.add_match(udevmm::enumerator::subsystem("block"));
-
-	for (udevmm::device device : query) {
-		std::cout << device.sysname() << ": " << device.sysattr_value("stat")
-				<< std::endl;
+namespace udevmm {
+struct udev::udev_private {
+	udev_private() :
+			_udev(udev_new()) {
+		if (!_udev)
+			throw std::bad_alloc();
 	}
+
+	~udev_private() {
+		udev_unref(_udev);
+	}
+
+	udev_private(const udev_private &other) :
+			_udev(other._udev) {
+		udev_ref(_udev);
+	}
+
+	::udev* _udev;
+};
 }
+#endif

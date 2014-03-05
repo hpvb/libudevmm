@@ -19,8 +19,25 @@
 #ifndef libudevmm_enumerator_private_H
 #define libudevmm_enumerator_private_H
 
+#include <libudev.h>
+
 namespace udevmm {
 struct enumerator::enumerator_private {
+	enumerator_private(::udev* udev) :
+			_enumerate(udev_enumerate_new(udev)) {
+		if (!_enumerate)
+			throw std::bad_alloc();
+	}
+
+	~enumerator_private() {
+		udev_enumerate_unref(_enumerate);
+	}
+
+	enumerator_private(const enumerator_private &other) :
+			_enumerate(other._enumerate) {
+		udev_enumerate_ref(_enumerate);
+	}
+
 	udev_enumerate* _enumerate;
 };
 }

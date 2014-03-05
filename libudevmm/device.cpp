@@ -24,9 +24,7 @@
 namespace udevmm {
 
 device::device(const device& other) :
-		_d_ptr(new device_private) {
-	_d_ptr->_device = other._d_ptr->_device;
-	udev_device_ref(_d_ptr->_device);
+		_d_ptr(other._d_ptr) {
 }
 
 device::device(device_private* d_ptr) :
@@ -34,7 +32,6 @@ device::device(device_private* d_ptr) :
 }
 
 device::~device() {
-	udev_device_unref(_d_ptr->_device);
 	delete _d_ptr;
 }
 

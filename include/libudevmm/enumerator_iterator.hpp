@@ -19,10 +19,8 @@
 #ifndef libudevmm_enumerator_iterator_H
 #define libudevmm_enumerator_iterator_H
 
-#include <libudevmm/device.hpp>
-#include <libudevmm/enumerator.hpp>
-
 namespace udevmm {
+class device;
 class enumerator;
 
 //TODO Make this a complete input_iterator

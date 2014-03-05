@@ -19,14 +19,22 @@
 #ifndef libudevmm_device_private_H
 #define libudevmm_device_private_H
 
+#include <iostream>
+#include <libudevmm/device.hpp>
+
 namespace udevmm {
 struct device::device_private {
 	device_private(udev_device* dev) :
 			_device(dev) {
 	}
 
-	device_private() :
-			_device(NULL) {
+	device_private(const device_private &other) :
+			_device(other._device) {
+		udev_device_ref(_device);
+	}
+
+	~device_private() {
+		udev_device_unref(_device);
 	}
 
 	udev_device* _device;

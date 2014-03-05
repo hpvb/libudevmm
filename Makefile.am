@@ -10,7 +10,8 @@ libudevmm_libudevmm_la_SOURCES = \
  libudevmm/enumerator_private.hpp\
  libudevmm/device.cpp\
  libudevmm/enumerator.cpp\
- libudevmm/enumerator_iterator.cpp
+ libudevmm/enumerator_iterator.cpp\
+ libudevmm/udev.cpp
 libudevmm_libudevmm_la_LDFLAGS = $(DEPS_LIBS)
 libudevmm_libudevmm_la_CPPFLAGS = -Iinclude
 

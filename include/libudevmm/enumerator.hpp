@@ -19,8 +19,8 @@
 #ifndef libudevmm_enumerator_H
 #define libudevmm_enumerator_H
 
+#include <string>
 #include <libudevmm/device.hpp>
-#include <libudevmm/enumerator_iterator.hpp>
 
 namespace udevmm {
 class enumerator_iterator;
@@ -28,7 +28,7 @@ class enumerator_iterator;
 class enumerator {
 public:
 	typedef enumerator_iterator iterator;
-	typedef udevmm::device value_type;
+	typedef device value_type;
 
 	class subsystem {
 		friend class enumerator;
@@ -75,11 +75,11 @@ public:
 	class parent {
 		friend class enumerator;
 	public:
-		parent(const udevmm::device& parent) :
+		parent(const device& parent) :
 				_parent(parent) {
 		}
 	private:
-		udevmm::device _parent;
+		device _parent;
 	};
 
 	class sysname {
@@ -107,6 +107,7 @@ public:
 	iterator end() const;
 
 	friend class enumerator_iterator;
+	friend class udev;
 private:
 	struct enumerator_private;
 	enumerator(enumerator_private* enumerator_private);
