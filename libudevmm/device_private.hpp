@@ -21,21 +21,50 @@
 
 #include <libudevmm/device.hpp>
 
+#include "raii/udev.hpp"
+
 namespace udevmm {
 struct device::device_private {
 	device_private(udev_device* dev) :
 			_device(dev) {
 	}
 
-	device_private(const device_private &other) :
-			_device(other._device) {
+	device_private(const udevmm::syspath& syspath) :
+			_device(
+					udev_device_new_from_syspath(_udev.ptr,
+							syspath.get_c_str())) {
+	}
+
+	device_private(const char type, const udevmm::devnum& devnum) :
+			_device(
+					udev_device_new_from_devnum(_udev.ptr, type,
+							devnum.get_devnum())) {
+	}
+
+	device_private(const udevmm::subsystem& subsystem,
+			const udevmm::sysname& sysname) :
+			_device(
+					udev_device_new_from_subsystem_sysname(_udev.ptr,
+							subsystem.get_c_str(), sysname.get_c_str())) {
+	}
+
+	device_private(const udevmm::device_id& device_id) :
+			_device(
+					udev_device_new_from_device_id(_udev.ptr,
+							const_cast<char*>(device_id.get_c_str()))) {
+
+	}
+
+	device_private(const device_private &other) {
 		udev_device_ref(_device);
+		_device = other._device;
 	}
 
 	~device_private() {
 		udev_device_unref(_device);
 	}
 
+	raii::udev _udev;
 	udev_device* _device;
 };
 }

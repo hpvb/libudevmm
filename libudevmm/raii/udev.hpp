@@ -16,13 +16,31 @@
  * along with libudevmm; If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef libudevmm_H
-#define libudevmm_H
+#ifndef libudevmm_raii_udev_H
+#define libudevmm_raii_udev_H
 
-#include <libudevmm/types.hpp>
-#include <libudevmm/udev.hpp>
-#include <libudevmm/device.hpp>
-#include <libudevmm/enumerator.hpp>
-#include <libudevmm/enumerator_iterator.hpp>
+#include <libudev.h>
 
+namespace udevmm {
+namespace raii {
+struct udev {
+	udev() :
+			ptr(udev_new()) {
+		if (!ptr)
+			throw std::bad_alloc();
+	}
+
+	udev(const udev &other) {
+		udev_ref(ptr);
+		ptr = other.ptr;
+	}
+
+	~udev() {
+		udev_unref(ptr);
+	}
+
+	::udev* ptr;
+};
+}
+}
 #endif

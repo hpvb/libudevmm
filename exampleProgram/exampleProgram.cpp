@@ -19,6 +19,7 @@
 #include <iostream>
 #include <libudevmm.hpp>
 
+
 int main(void) {
 	udevmm::udev udev = udevmm::udev();
 	udevmm::enumerator query = udev.new_enumerator();

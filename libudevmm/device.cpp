@@ -27,8 +27,9 @@ device::device(const device& other) :
 		_d_ptr(other._d_ptr) {
 }
 
-device::device(device_private* d_ptr) :
-		_d_ptr(d_ptr) {
+device::device(const udevmm::syspath& syspath) :
+		_d_ptr(new device_private(syspath)) {
+
 }
 
 device::~device() {

@@ -21,6 +21,8 @@
 #include <libudevmm/enumerator.hpp>
 #include <libudevmm/enumerator_iterator.hpp>
 
+#include <libudevmm/types.hpp>
+
 #include "device_private.hpp"
 #include "enumerator_private.hpp"
 
@@ -41,7 +43,7 @@ enumerator_iterator::enumerator_iterator(const enumerator& enumerator) :
 
 enumerator_iterator::enumerator_iterator(int start) :
 		_d_ptr(new enumerator_iterator_private) {
-	(void)start;
+	(void) start;
 
 	_d_ptr->_enumerate = NULL;
 	_d_ptr->_head = NULL;
@@ -53,20 +55,20 @@ enumerator_iterator::~enumerator_iterator() {
 	delete _d_ptr;
 }
 
-bool enumerator_iterator::operator==(const enumerator_iterator::self_type& rhs) const {
+bool enumerator_iterator::operator==(
+		const enumerator_iterator::self_type& rhs) const {
 	return _d_ptr->_current == rhs._d_ptr->_current;
 }
 
-bool enumerator_iterator::operator!=(const enumerator_iterator::self_type& rhs) const {
+bool enumerator_iterator::operator!=(
+		const enumerator_iterator::self_type& rhs) const {
 	return _d_ptr->_current != rhs._d_ptr->_current;
 }
 
 enumerator_iterator::value_type enumerator_iterator::operator*() {
 	const char* syspath = udev_list_entry_get_name(_d_ptr->_current);
-	udev_device* dev = udev_device_new_from_syspath(
-			udev_enumerate_get_udev(_d_ptr->_enumerate), syspath);
 
-	return device(new device::device_private(dev));
+	return device(udevmm::syspath(syspath));
 }
 
 enumerator_iterator::self_type& enumerator_iterator::operator++() {

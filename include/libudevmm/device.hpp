@@ -22,10 +22,17 @@
 #include <string>
 #include <sys/types.h>
 
+#include <libudevmm/types.hpp>
+
 namespace udevmm {
 class device {
 public:
-	device(const device& other);
+	device(const device&);
+	device(const udevmm::syspath&);
+	device(const udevmm::devnum&);
+	device(const udevmm::subsystem&, const udevmm::sysname&);
+	device(const udevmm::device_id&);
+
 	~device();
 	device& operator=(device other);
 
@@ -36,18 +43,16 @@ public:
 	const std::string sysname();
 	const std::string sysnum();
 	const std::string devnode();
-	const std::string property_value(const std::string& property);
+	const std::string property_value(const std::string&);
 	const std::string driver();
 	dev_t devnum();
 	const std::string action();
-	const std::string sysattr_value(const std::string& sysattr);
+	const std::string sysattr_value(const std::string&);
 
 	friend class enumerator;
-	friend class enumerator_iterator;
 private:
 	struct device_private;
 	device();
-	device(device_private* device_private);
 	device_private* _d_ptr;
 };
 }
